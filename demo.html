@@ -15,6 +15,7 @@
             font-size: 0;
             font: inherit;
             vertical-align: baseline;
+            background-color: transparent;
         }
 
         h1 {
@@ -28,7 +29,11 @@
 
         a:hover {
             text-decoration: none;
-            color:#fd4c5d;
+            color: #fd4c5d;
+        }
+
+        li {
+            list-style: none;
         }
 
         body {
@@ -52,12 +57,12 @@
         }
 
         .menu {
-            height: 48px;
+            font-size: 14px;
+            height: 46px;
             background-color: #fff;
             position: relative;
             width: 100%;
             z-index: 2;
-
         }
 
         .banner {
@@ -146,13 +151,84 @@
         }
 
         .right-guide {
-            line-height: 48px; 
+            line-height: 48px;
         }
 
         .right-guide a {
             line-height: 48px;
             display: inline-block;
             margin-left: 20px;
+        }
+
+        /* menu */
+
+        .menu ul {
+            display: block;
+            width: 1190px;
+            height: 46px;
+            margin: 0 auto;
+            line-height: 46px;
+        }
+
+        .menu ul li {
+            float: left;
+            margin-left: 35px;
+        }
+
+        .menu ul li a {
+            display: block;
+            padding: 0 6px;
+        }
+
+        .menu ul li:hover a {
+            border-bottom: 3px solid #fd4c5d;
+        }
+
+        .header.fixed .menu-sub {
+            top: 304px;
+            left: 0;
+ height: 46px;
+ position: absolute;
+        }
+
+        .menu-sub {
+            height: 46px;
+            display: none;
+            box-shadow: 1px 1px #e5e5e5;
+            border: 1px solid #e5e5e5;
+            background: rgba(255, 255, 255, 0.9);
+            position: relative;
+            width: 100%;
+        }
+
+        .menu-sub-con {
+            position: relative;
+            width: 100%;
+            height: 46px;
+        }
+
+        .menu-sub ul {
+            font-size: 14px;
+            height: 46px;
+            line-height: 46px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+
+        }
+
+        .menu-sub ul li {
+            float: left;
+            margin-left: 46px;
+        }
+
+        /* main */
+
+        .main {
+            width: 100;
+            height: 1200px;
+            background-color: #fd4c5d;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
@@ -166,6 +242,40 @@
                 } else {
                     $(".header").removeClass("fixed");
                 }
+            });
+
+            var L, E;
+            $(".menu li").each(function (index, e) {
+                $(e).hover(function () {
+                    var e = $(this),
+                        data = e.data("category");
+                    clearTimeout(L);
+                    E = setTimeout(function () {
+                        $(".menu-sub ul").hide();
+                        $(".menu-sub")[0].style.display = "block";
+                        var $sub_menu = $(".menu-sub").find("ul[data-category=" + data +
+                            "]");
+                        var r = e.offset().left - $sub_menu.outerWidth() / 2;
+                        r = r < 0 ? 0 : r;
+                        $sub_menu.css(
+                            "left", r).show();
+                    }, 150);
+                }, function () {
+                    var e = $(this)
+                    data = e.data("category");
+                    clearTimeout(E);
+                    L = setTimeout(function () {
+                        $(".menu-sub")[0].style.display = "none";
+                        $(".menu-sub").find("ul[data-category=" + data + "]").hide();
+                    }, 1e3);
+                });
+            });
+
+            $(".menu-sub").hover(function () {
+                clearTimeout(L);
+            }, function () {
+                $(".menu-sub")[0].style.display = "none";
+                $(".menu-sub ul").hide();
             });
         });
     </script>
@@ -219,7 +329,107 @@
             </div>
         </div>
         <a class="banner"></a>
-        <div class="menu"></div>
+        <div class="menu">
+            <ul>
+                <li data-category="1">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="2">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="3">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="4">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="5">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="6">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="7">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="8">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="9">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="10">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="11">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="12">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="13">
+                    <a href="#">呵呵</a>
+                </li>
+                <li data-category="14">
+                    <a href="#">呵呵</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-sub">
+            <div class="menu-sub-con">
+                <ul data-category="1">
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                </ul>
+
+                <ul data-category="2">
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                </ul>
+                <ul data-category="3">
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                </ul>
+                <ul data-category="4">
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                </ul>
+
+                <ul data-category="5">
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                </ul>
+
+                <ul data-category="6">
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                    <li>呵呵</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- main -->
+    <div class="main">
+
     </div>
 </body>
 
