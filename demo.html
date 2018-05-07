@@ -184,12 +184,12 @@
             border-bottom: 3px solid #fd4c5d;
         }
 
-        .header.fixed .menu-sub {
+        /* .header.fixed .menu-sub {
             top: 304px;
             left: 0;
  height: 46px;
  position: absolute;
-        }
+        } */
 
         .menu-sub {
             height: 46px;
@@ -199,6 +199,7 @@
             background: rgba(255, 255, 255, 0.9);
             position: relative;
             width: 100%;
+
         }
 
         .menu-sub-con {
@@ -221,6 +222,7 @@
         .menu-sub ul li {
             float: left;
             margin-left: 46px;
+            line-height: 46px;
         }
 
         /* main */
@@ -251,14 +253,20 @@
                         data = e.data("category");
                     clearTimeout(L);
                     E = setTimeout(function () {
-                        $(".menu-sub ul").hide();
-                        $(".menu-sub")[0].style.display = "block";
                         var $sub_menu = $(".menu-sub").find("ul[data-category=" + data +
                             "]");
-                        var r = e.offset().left - $sub_menu.outerWidth() / 2;
-                        r = r < 0 ? 0 : r;
-                        $sub_menu.css(
-                            "left", r).show();
+                        if ($sub_menu.length) {
+                            $(".menu-sub ul").hide();
+                            $(".menu-sub")[0].style.display = "block";
+
+                            var r = e.offset().left - $sub_menu.outerWidth() / 2;
+                            r = r < 0 ? 0 : r;
+                            $sub_menu.css(
+                                "left", r).show();
+                        } else {
+                            $(".menu-sub")[0].style.display = "none";
+                            $(".menu-sub").find("ul[data-category=" + data + "]").hide();
+                        }
                     }, 150);
                 }, function () {
                     var e = $(this)
