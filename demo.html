@@ -324,8 +324,8 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            right: 0;
             left: 492px;
+            width: 680px;
             font-size: 0;
 
         }
@@ -387,11 +387,19 @@
             color: #999;
             vertical-align: bottom;
         }
+        
+        #sec2 .content {
+            overflow: hidden;
+        }
 
         #sec2 .content a{
             display: block;
             width:160px;
             height: 90px; 
+        }
+
+        #sec2 .content .col-left {
+            float: left;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
@@ -738,19 +746,22 @@
                 <p>吃我蕉啦！</p>
             </div>
             <div class="content">
-                <ul>
-                    <li>
-                        <figure>
-                            <a href="">
-                                <img src="http://cdn.aixifan.com/dotnet/artemis/u/cms/www/201805/05111814mz7cd4aw.gif?imageView2/1/w/320/h/180" width="100%" height="100%">
-                                <div class="mask"></div>
-                            </a>
-                            <figcation>
-                                <b></b>
-                            </figcation>
-                        </figure>
-                    </li>
-                </ul>
+                <div class="col-left">
+                        <ul>
+                                <li>
+                                    <figure>
+                                        <a href="">
+                                            <img src="http://cdn.aixifan.com/dotnet/artemis/u/cms/www/201805/05111814mz7cd4aw.gif?imageView2/1/w/320/h/180" width="100%" height="100%">
+                                            <div class="mask"></div>
+                                        </a>
+                                        <figcation>
+                                            <b></b>
+                                        </figcation>
+                                    </figure>
+                                </li>
+                            </ul>
+                </div>
+                <div class="col-right"></div>
             </div>
         </section>
     </div>
