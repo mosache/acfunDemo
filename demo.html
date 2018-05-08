@@ -247,7 +247,7 @@
 
         /* section*/
 
-        #sec1 {
+        .sec {
             margin: 0 110px;
             /* height: 260px; */
             /* border: 1px solid #fd4c5d; */
@@ -257,6 +257,11 @@
             clear: both;
             display: block;
         }
+
+
+        /* #sec1 {
+           
+        } */
 
         .slider-bigger {
             /* border: 1px solid #f0f; */
@@ -363,6 +368,30 @@
         .x6 img {
             width: 206px;
             height: 114px;
+        }
+
+        /* sec2 */
+
+        #sec2 .title b {
+            display: inline-block;
+            font-size: 18px;
+            line-height: 40px;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        #sec2 .title p {
+            display: inline-block;
+            font-size: 12px;
+            margin-left: 10px;
+            color: #999;
+            vertical-align: bottom;
+        }
+
+        #sec2 .content a{
+            display: block;
+            width:160px;
+            height: 90px; 
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
@@ -613,7 +642,7 @@
 
     <!-- main -->
     <div class="main">
-        <section id="sec1" class="wp">
+        <section id="sec1" class="wp sec">
             <div class="slider-wrap fl">
                 <div class="slider-bigger">
                     <ul>
@@ -697,6 +726,29 @@
 
                         </a>
                         <div class="mask"></div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="sec2" class="sec">
+            <div class="title">
+                <img src="http://imgs.aixifan.com/cms/2017_11_01/1509533250991.gif?imageView2/1/w/100/h/100" width="40" height="40">
+                <b>猴子推荐</b>
+                <p>吃我蕉啦！</p>
+            </div>
+            <div class="content">
+                <ul>
+                    <li>
+                        <figure>
+                            <a href="">
+                                <img src="http://cdn.aixifan.com/dotnet/artemis/u/cms/www/201805/05111814mz7cd4aw.gif?imageView2/1/w/320/h/180" width="100%" height="100%">
+                                <div class="mask"></div>
+                            </a>
+                            <figcation>
+                                <b></b>
+                            </figcation>
+                        </figure>
                     </li>
                 </ul>
             </div>
