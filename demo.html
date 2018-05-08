@@ -36,9 +36,18 @@
             list-style: none;
         }
 
+        li:hover {
+            cursor: pointer;
+        }
+
         body {
             font-size: 12px;
             width: 100%;
+            background-color: #e5e5e5;
+        }
+
+        .wp {
+            margin: 0 auto;
         }
 
         .fixed_top {
@@ -72,6 +81,10 @@
             background-repeat: no-repeat;
             position: relative;
             height: 180px;
+        }
+
+        .header.fixed {
+            height: 226px;
         }
 
         .header.fixed .menu {
@@ -228,14 +241,159 @@
         /* main */
 
         .main {
-            width: 100;
+            width: 100%;
             height: 1200px;
+        }
+
+        /* section*/
+
+        #sec1 {
+            margin: 0 110px;
+            /* height: 260px; */
+            /* border: 1px solid #fd4c5d; */
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            clear: both;
+            display: block;
+        }
+
+        .slider-bigger {
+            /* border: 1px solid #f0f; */
+            width: 482px;
+            height: 247px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-bigger ul {
+            width: 2892px;
+            font-size: 0;
+            position: relative;
+            left: 0;
+            transition: left .8s ease;
+        }
+
+        .slider-bigger ul.no-transition {
+            transition: none;
+        }
+
+        .slider-bigger ul li {
+            width: 482px;
+            height: 247px;
+            display: inline-block;
+        }
+
+        .slider-bigger img {
+            width: 482px;
+            height: 247px;
+            vertical-align: top;
+        }
+
+        .slider-count {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .slider-count span {
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background-color: #fff;
+            margin-left: 5px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .slider-count span.active {
+            width: 20px;
+            height: 10px;
             background-color: #fd4c5d;
+        }
+
+        /* x6 */
+
+        .x6 {
+            margin: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 492px;
+            font-size: 0;
+
+        }
+
+        .x6 .img-container {
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .x6 .img-container li {
+            width: 206px;
+            height: 114px;
+            float: left;
+            margin: 10px;
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .x6 .img-container li a {
+            display: block;
+            width: 206px;
+            height: 114px;
+        }
+
+        .x6 .img-container li .mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+            background-color: rgba(59, 59, 59, 0.7);
+        }
+
+        .x6 .img-container li:hover .mask {
+            display: block;
+        }
+
+        .x6 img {
+            width: 206px;
+            height: 114px;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
     <script src="./js/bootstrap.js"></script>
     <script>
+        function startSlider() {
+            return setInterval(function () {
+                var slider_wrap = $(".slider-bigger ul")[0];
+                var myLeft = parseInt($(slider_wrap).css("left")) - 482;
+                if (myLeft >= -2410) {
+                    slider_wrap.style.left = myLeft +
+                        "px";
+                } else {
+                    $(".slider-bigger ul").addClass("no-transition");
+                    slider_wrap.style.left = "0px";
+                    setTimeout(function () {
+                        myLeft = 0;
+                        $(".slider-bigger ul").removeClass("no-transition");
+                    }, 380);
+                }
+                var index = Math.abs(myLeft / 482);
+                if (index >
+                    4) {
+                    index = 0;
+                }
+                $(".slider-count span").removeClass("active");
+                $($(".slider-count span")[index]).addClass("active");
+            }, 2000);
+        }
+
+
         $(function () {
             $(window).scroll(function () {
                 var offset = $(window).scrollTop();
@@ -284,6 +442,22 @@
             }, function () {
                 $(".menu-sub")[0].style.display = "none";
                 $(".menu-sub ul").hide();
+            });
+
+            $($(".slider-count span")[0]).addClass("active");
+            var firstNode = $(".slider-wrap ul li").first().clone(true);
+            $(".slider-wrap ul").append(firstNode);
+
+            SLIDER_INTERVAL = startSlider();
+
+            $(".slider-count span").click(function () {
+                clearInterval(SLIDER_INTERVAL);
+                var el = $(this);
+                var index = parseInt(el.data("index"));
+                $(".slider-count span").removeClass("active");
+                $($(".slider-count span")[index]).addClass("active");
+                $(".slider-bigger ul").css("left", -482 * index);
+                SLIDER_INTERVAL = startSlider();
             });
         });
     </script>
@@ -392,7 +566,7 @@
                         <li>呵呵</li>
                         <li>呵呵</li>
                     </ul>
-    
+
                     <ul data-category="2">
                         <li>呵呵</li>
                         <li>呵呵</li>
@@ -414,7 +588,7 @@
                         <li>呵呵</li>
                         <li>呵呵</li>
                     </ul>
-    
+
                     <ul data-category="5">
                         <li>呵呵</li>
                         <li>呵呵</li>
@@ -422,7 +596,7 @@
                         <li>呵呵</li>
                         <li>呵呵</li>
                     </ul>
-    
+
                     <ul data-category="6">
                         <li>呵呵</li>
                         <li>呵呵</li>
@@ -434,12 +608,99 @@
             </div>
         </div>
 
-       
+
     </div>
 
     <!-- main -->
     <div class="main">
+        <section id="sec1" class="wp">
+            <div class="slider-wrap fl">
+                <div class="slider-bigger">
+                    <ul>
+                        <li>
+                            <a href="">
+                                <img src="http://imgs.aixifan.com/cms/2018_05_04/1525413962421.jpg?imageView2/1/w/508/h/260/q/100">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="http://imgs.aixifan.com/cms/2018_05_04/1525399903909.jpg?undefined">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="http://imgs.aixifan.com/cms/2018_05_03/1525338520701.jpg?imageView2/1/w/508/h/260/q/100">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="http://imgs.aixifan.com/cms/2018_05_02/1525258209065.png?imageView2/1/w/508/h/260/q/100">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="http://imgs.aixifan.com/cms/2018_05_02/1525275018105.png?imageView2/1/w/508/h/260/q/100">
+                            </a>
+                        </li>
+                    </ul>
 
+                    <div class="slider-count">
+                        <span data-index="0"></span>
+                        <span data-index="1"></span>
+                        <span data-index="2"></span>
+                        <span data-index="3"></span>
+                        <span data-index="4"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="x6 fr">
+                <ul class="img-container">
+                    <li>
+                        <a href="">
+                            <img src="http://imgs.aixifan.com/content/2018_05_07/1525673735.png?imageView2/1/w/432/h/240">
+
+                        </a>
+                        <div class="mask"></div>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="http://imgs.aixifan.com/content/2018_05_03/1525344427.jpg?imageView2/1/w/432/h/240">
+
+                        </a>
+                        <div class="mask"></div>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="http://imgs.aixifan.com/content/2018_05_05/1525512006.jpg?imageView2/1/w/432/h/240">
+                            <div class="mask"></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="http://imgs.aixifan.com/content/2018_05_04/1525433207.jpg?imageView2/1/w/432/h/240">
+
+                        </a>
+                        <div class="mask"></div>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="http://cdn.aixifan.com/dotnet/artemis/u/cms/www/201805/07101350zkj1c9w2.jpg?imageView2/1/w/432/h/240">
+
+                        </a>
+                        <div class="mask"></div>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="http://imgs.aixifan.com/content/2018_05_07/1525662759.jpg?imageView2/1/w/432/h/240">
+
+                        </a>
+                        <div class="mask"></div>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </div>
 </body>
 
